@@ -8,7 +8,7 @@ function Verifier(options) {
 }
 
 Verifier.prototype.validateConsumable = function(receipt, cb) {
-    var urlPattern = "https://appstore-sdk.amazon.com/version/2.0/verify/developer/%s/user/%s/purchaseToken/%s";
+    var urlPattern = "https://appstore-sdk.amazon.com/version/1.0/verifyReceipt/developer/%s/user/%s/receiptId/%s";
     var finalUrl = util.format(urlPattern, encodeURIComponent(this.options.key), encodeURIComponent(receipt.userId), encodeURIComponent(receipt.purchaseToken));
     request({
         url: finalUrl,
@@ -33,7 +33,7 @@ Verifier.prototype.validateConsumable = function(receipt, cb) {
             return cb(new Error('Amazon RVS Error: Unknown other error'));
         }
         if (_.every(['productId', 'productType', 'purchaseDate'], Object.prototype.hasOwnProperty, body)) {
-            cb(null, obj);
+            cb(null, body);
         } else {
             cb(new Error("body did not contain expected json object"));
         }
