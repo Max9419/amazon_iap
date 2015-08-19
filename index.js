@@ -8,7 +8,7 @@ function Verifier(options) {
 }
 
 Verifier.prototype.validateConsumable = function(receipt, cb) {
-    var urlPattern = "https://appstore-sdk.amazon.com/version/1.0/verifyReceipt/developer/%s/user/%s/receiptId/%s";
+    var urlPattern = "https://appstore-sdk.amazon.com/version/1.0/verifyReceiptId/developer/%s/user/%s/receiptId/%s";
     var finalUrl = util.format(urlPattern, encodeURIComponent(this.options.key), encodeURIComponent(receipt.userId), encodeURIComponent(receipt.purchaseToken));
     request({
         url: finalUrl,
